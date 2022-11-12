@@ -1,0 +1,24 @@
+- name: Install dnf-plugins-core
+  become: true
+  dnf:
+    name: dnf-plugins-core
+    state: present
+
+- name: Add Hashicorp repo
+  become: true
+  command:
+    cmd: dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    creates: /etc/yum.repos.d/hashicorp.repo
+
+- name: Install packages
+  become: true
+  dnf:
+    name:
+      # For Vitals extension
+      - libgtop2-devel
+      - lm_sensors
+      - vim
+      - htop
+      - nomad
+      - https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm
+    state: present

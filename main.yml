@@ -1,0 +1,14 @@
+---
+- hosts: all
+  roles:
+    - role: petermosmans.customize-gnome
+  vars:
+    gnome_extensions:
+      # Vitals: https://github.com/corecoding/Vitals
+      - id: 1460
+
+  tasks:
+    - name: Install packages
+      ansible.builtin.include_tasks: ./tasks/packages.yml
+    - name: Install and configure Docker
+      ansible.builtin.include_tasks: ./tasks/docker.yml
